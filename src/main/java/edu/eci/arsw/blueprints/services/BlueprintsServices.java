@@ -31,9 +31,7 @@ public class BlueprintsServices {
 
     }
     
-    public Map<Tuple<String,String>,Blueprint> getAllBlueprints(){
-        return bpp.getAllBlueprints();
-    }
+
     
     /**
      * 
@@ -53,10 +51,10 @@ public class BlueprintsServices {
      * @throws BlueprintNotFoundException if the given author doesn't exist
      */
     public Set<Blueprint> getBlueprintsByAuthor(String author) throws BlueprintNotFoundException{
-        Map<Tuple<String,String>,Blueprint> allBp = getAllBlueprints();
-        Set<Tuple<String,String>> keys = allBp.keySet();
+        return bpp.getBlueprintsByAuthor(author);
 
-        for(Tuple)
+
+
 
 
     }

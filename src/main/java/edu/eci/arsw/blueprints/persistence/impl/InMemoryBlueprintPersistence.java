@@ -11,32 +11,32 @@ import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
 import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
 import edu.eci.arsw.blueprints.persistence.BlueprintsPersistence;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
-
+import java.util.Set;
 /**
  *
  * @author hcadavid
  */
-public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
+public class InMemoryBlueprintPersistence implements BlueprintsPersistence {
 
-    private final Map<Tuple<String,String>,Blueprint> blueprints=new HashMap<>();
+    private final Map<Tuple<String, String>, Blueprint> blueprints = new HashMap<>();
 
     public InMemoryBlueprintPersistence() {
         //load stub data
-        Point[] pts=new Point[]{new Point(140, 140),new Point(115, 115)};
-        Blueprint bp=new Blueprint("_authorname_", "_bpname_ ",pts);
-        blueprints.put(new Tuple<>(bp.getAuthor(),bp.getName()), bp);
-        
-    }    
-    
+        Point[] pts = new Point[]{new Point(140, 140), new Point(115, 115)};
+        Blueprint bp = new Blueprint("_authorname_", "_bpname_ ", pts);
+        blueprints.put(new Tuple<>(bp.getAuthor(), bp.getName()), bp);
+
+    }
+
     @Override
     public void saveBlueprint(Blueprint bp) throws BlueprintPersistenceException {
-        if (blueprints.containsKey(new Tuple<>(bp.getAuthor(),bp.getName()))){
-            throw new BlueprintPersistenceException("The given blueprint already exists: "+bp);
+        if (blueprints.containsKey(new Tuple<>(bp.getAuthor(), bp.getName()))) {
+            throw new BlueprintPersistenceException("The given blueprint already exists: " + bp);
+        } else {
+            blueprints.put(new Tuple<>(bp.getAuthor(), bp.getName()), bp);
         }
-        else{
-            blueprints.put(new Tuple<>(bp.getAuthor(),bp.getName()), bp);
-        }        
     }
 
     @Override
@@ -45,8 +45,15 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
     }
 
     @Override
-    public Map<Tuple<String, String>, Blueprint> getAllBlueprints() {
-        return blueprints;
+    public Set<Blueprint> getBlueprintsByAuthor(String author) {
+        Set<Tuple<String,String>> keys = blueprints.keySet();
+        Set<Blueprint> AuthorBluePrints = new HashSet<Blueprint>();
+        for(Tuple<String,String> bp : keys){
+            if(blueprints.get(bp).getAuthor().equals(author)){
+                AuthorBluePrints.add(blueprints.get(bp));
+            }
+        }
+        return AuthorBluePrints;
     }
 
 

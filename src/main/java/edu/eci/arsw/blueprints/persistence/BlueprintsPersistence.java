@@ -36,7 +36,7 @@ public interface BlueprintsPersistence {
 
 
 
-    public Map<Tuple<String,String>,Blueprint> getAllBlueprints();
+    public Set<Blueprint> getBlueprintsByAuthor(String author);
 
 
     
