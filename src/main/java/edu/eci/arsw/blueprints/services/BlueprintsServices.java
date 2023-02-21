@@ -12,6 +12,8 @@ import edu.eci.arsw.blueprints.persistence.BlueprintsPersistence;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
+
+import edu.eci.arsw.blueprints.persistence.impl.Tuple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,8 +31,8 @@ public class BlueprintsServices {
 
     }
     
-    public Set<Blueprint> getAllBlueprints(){
-
+    public Map<Tuple<String,String>,Blueprint> getAllBlueprints(){
+        return bpp.getAllBlueprints();
     }
     
     /**
@@ -51,7 +53,10 @@ public class BlueprintsServices {
      * @throws BlueprintNotFoundException if the given author doesn't exist
      */
     public Set<Blueprint> getBlueprintsByAuthor(String author) throws BlueprintNotFoundException{
+        Map<Tuple<String,String>,Blueprint> allBp = getAllBlueprints();
+        Set<Tuple<String,String>> keys = allBp.keySet();
 
+        for(Tuple)
 
 
     }

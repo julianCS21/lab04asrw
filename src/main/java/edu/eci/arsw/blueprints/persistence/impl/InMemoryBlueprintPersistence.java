@@ -44,6 +44,10 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
         return blueprints.get(new Tuple<>(author, bprintname));
     }
 
-    
-    
+    @Override
+    public Map<Tuple<String, String>, Blueprint> getAllBlueprints() {
+        return blueprints;
+    }
+
+
 }
