@@ -10,9 +10,16 @@ import edu.eci.arsw.blueprints.model.Point;
 import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
 import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
 import edu.eci.arsw.blueprints.persistence.impl.InMemoryBlueprintPersistence;
+
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import edu.eci.arsw.blueprints.services.BlueprintsServices;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import static org.junit.Assert.*;
 
 /**
@@ -67,6 +74,50 @@ public class InMemoryPersistenceTest {
         }
                 
         
+    }
+
+
+    @Test
+    public void GivenABlueprintAndThisAuthorAndNameThenShouldGetThisBlueprint() throws BlueprintNotFoundException, BlueprintPersistenceException {
+        //Arrange
+        InMemoryBlueprintPersistence bps = new InMemoryBlueprintPersistence();
+        Blueprint newBlueprint = new Blueprint("julian","castillo");
+        bps.saveBlueprint(newBlueprint);
+        //act
+        Blueprint result = bps.getBlueprint("julian","castillo");
+        //assert
+        assertEquals("julian",result.getAuthor());
+        assertEquals("castillo",result.getName());
+    }
+
+
+    @Test
+    public void GivenABluePrintAndThisAuthorThenShouldGetAllBlueprintsWithThisAuthor() throws BlueprintPersistenceException {
+
+        //Arrange
+        InMemoryBlueprintPersistence bps = new InMemoryBlueprintPersistence();
+        Blueprint newBlueprint = new Blueprint("camilo","castillo");
+        Blueprint newBlueprint2 = new Blueprint("camilo","cantillo");
+        Blueprint newBlueprint3 = new Blueprint("camilo","soto");
+        bps.saveBlueprint(newBlueprint);
+        bps.saveBlueprint(newBlueprint2);
+        bps.saveBlueprint(newBlueprint3);
+
+        //Act
+        Set<Blueprint> result = bps.getBlueprintsByAuthor("camilo");
+
+
+
+        //Assert
+        boolean check = true;
+        for(Blueprint bp : result){
+            if(!(bp.getAuthor().equals("camilo"))){
+                check = false;
+            }
+        }
+
+        assertTrue(check);
+
     }
 
 
