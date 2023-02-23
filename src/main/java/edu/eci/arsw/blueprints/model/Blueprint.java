@@ -10,7 +10,11 @@ import java.util.Objects;
 public class Blueprint {
 
     private String author=null;
-    
+
+    public void setPoints(List<Point> points) {
+        this.points = points;
+    }
+
     private List<Point> points=null;
     
     private String name=null;

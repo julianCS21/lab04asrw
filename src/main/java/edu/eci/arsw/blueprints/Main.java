@@ -1,3 +1,5 @@
+package edu.eci.arsw.blueprints;
+
 import edu.eci.arsw.blueprints.model.Blueprint;
 import edu.eci.arsw.blueprints.model.Point;
 import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
@@ -60,6 +62,7 @@ public class Main {
         for(Blueprint bpr : result5){
             System.out.println("PLANO : " + bpr.toString() );
         }
+
 
 
 

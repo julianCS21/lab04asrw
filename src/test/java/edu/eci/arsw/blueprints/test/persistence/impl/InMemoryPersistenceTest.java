@@ -14,12 +14,7 @@ import edu.eci.arsw.blueprints.persistence.impl.InMemoryBlueprintPersistence;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import edu.eci.arsw.blueprints.services.BlueprintsServices;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import static org.junit.Assert.*;
 
 /**
@@ -50,32 +45,28 @@ public class InMemoryPersistenceTest {
 
 
     @Test
-    public void saveExistingBpTest() {
-        InMemoryBlueprintPersistence ibpp=new InMemoryBlueprintPersistence();
-        
-        Point[] pts=new Point[]{new Point(0, 0),new Point(10, 10)};
-        Blueprint bp=new Blueprint("john", "thepaint",pts);
-        
+    public void saveExistingBpTest() throws BlueprintPersistenceException, BlueprintNotFoundException {
+        InMemoryBlueprintPersistence ibpp = new InMemoryBlueprintPersistence();
+
+        Point[] pts = new Point[]{new Point(0, 0), new Point(10, 10)};
+        Blueprint bp = new Blueprint("john", "thepaint", pts);
+
         try {
             ibpp.saveBlueprint(bp);
         } catch (BlueprintPersistenceException ex) {
             fail("Blueprint persistence failed inserting the first blueprint.");
         }
-        
-        Point[] pts2=new Point[]{new Point(10, 10),new Point(20, 20)};
-        Blueprint bp2=new Blueprint("john", "thepaint",pts2);
 
-        try{
+        Point[] pts2 = new Point[]{new Point(10, 10), new Point(20, 20)};
+        Blueprint bp2 = new Blueprint("john", "thepaint", pts2);
+
+        try {
             ibpp.saveBlueprint(bp2);
             fail("An exception was expected after saving a second blueprint with the same name and autor");
-        }
-        catch (BlueprintPersistenceException ex){
-            
-        }
-                
-        
-    }
+        } catch (BlueprintPersistenceException ex) {
 
+        }
+    }
 
     @Test
     public void GivenABlueprintAndThisAuthorAndNameThenShouldGetThisBlueprint() throws BlueprintNotFoundException, BlueprintPersistenceException {
@@ -121,5 +112,6 @@ public class InMemoryPersistenceTest {
     }
 
 
-    
+
+
 }

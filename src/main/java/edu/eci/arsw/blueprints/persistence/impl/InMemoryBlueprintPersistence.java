@@ -61,4 +61,9 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence {
     }
 
 
+    public Set<Blueprint> getAllBlueprints(){
+        return (Set<Blueprint>) blueprints.values();
+    }
+
+
 }

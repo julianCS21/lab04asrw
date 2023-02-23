@@ -14,9 +14,11 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
+import edu.eci.arsw.blueprints.persistence.filter;
 import edu.eci.arsw.blueprints.persistence.impl.Tuple;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 /**
@@ -27,7 +29,11 @@ import org.springframework.stereotype.Service;
 public class BlueprintsServices {
    
     @Autowired
+    @Qualifier("inMemoryBlueprintPersistence")
     BlueprintsPersistence bpp;
+
+
+
     
     public void addNewBlueprint(Blueprint bp) throws BlueprintPersistenceException {
         bpp.saveBlueprint(bp);
@@ -56,5 +62,8 @@ public class BlueprintsServices {
     public Set<Blueprint> getBlueprintsByAuthor(String author) throws BlueprintNotFoundException{
         return bpp.getBlueprintsByAuthor(author);
     }
+
+
+
     
 }
