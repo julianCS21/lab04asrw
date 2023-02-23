@@ -2,7 +2,7 @@
 
 ## Arquitecturas de Software
 
-# Julian Castillo S. y Camilo Cantillo T.
+## Julian Castillo S. y Camilo Cantillo T.
 
 # Componentes y conectores - Parte I.
 
