@@ -2,6 +2,8 @@
 
 ## Arquitecturas de Software
 
+# Julian Castillo S. y Camilo Cantillo T.
+
 # Componentes y conectores - Parte I.
 
 El ejercicio se debe traer terminado para el siguiente laboratorio (Parte II).
